@@ -1,0 +1,604 @@
+<div [hidden]="submitted">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <h1><b class="navbar-brand">Alarm Procedure Tracking</b></h1>
+                    <div class="navbar-header">
+                       <button  class="p-5" type="button" style="float: right;" class="btn btn-dark">Database</button>
+                    </div>
+                </div>
+            </nav>         
+        <div class="container" xmls="http://www.w3.org/1999/html">
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header">New Alarm</h2>
+                    </div>
+                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+  <div>
+    <div class="form-group">
+      <label for="ticketNum">Ticket Number: </label>
+      <input type="text"
+             class="form-control"
+             id="ticketNum"
+             [formControl]="ticketNum"
+             name="ticketNum"
+             placeholder="Ex. ALA467">
+    </div>
+    <div class="form-group">
+      <label for="customerName">Customer Name: </label>
+      <select type="select"
+             class="form-control"
+             id="customerName"
+             [formControl]="customerName"
+             name="customerName"
+             placeholder="Ex. DataSure24">
+             <option value="">--Select Customer--</option>
+             <option value="Conrail">Conrail</option>
+             <option value="Cornerstone">Cornerstone CCFCU</option>
+             <option value="Cerrone">Mark Cerrone Inc.</option>
+             <option value="Compusource">CompuSource Systems</option>
+             <option value="Franklin Oil">Franklin Oil</option>
+             <option value="Hospice">Hospice Buffalo</option>
+             <option value="Hunt">Hunt Mortgage</option>
+             <option value="Hunt Title">Hunt Title Agency</option>
+             <option value="Mount Laurel">Mount Laurel</option>
+             <option value="Parkview">Parkview</option>
+             <option value="Linkage">Linkage</option>
+             <option value="Grove City">Grove City</option>
+             <option value="Manchester">Manchester</option>
+             </select>
+    </div>
+    <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="affectedAsset" style="float: middle;">
+                    Affected Asset :
+                </label>
+
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline"  style="width:18em">
+                <input ngbbutton type="radio" ng-click="greenInt = greenInt+1" required [formControl]="affectedAsset" name=affectedAsset value="Workstation/Personal Device"> Workstation/Personal Device
+             </label>  
+
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input ngbbutton type="radio" ng-mousedown=myYellowEvent() required [formControl]="affectedAsset" name=affectedAsset value="Non Core Server/Network Device"> Non Core Server/Network Device
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline"  style="width:18em">
+                 <input ngbbutton type="radio" ng-mousedown="redInt = redInt+1" required [formControl]="affectedAsset" name=affectedAsset value="Core Asset"> Core Asset
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Impact of Alarm:
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline"  style="width:18em">
+                <input type="radio" required  [formControl]="alarmImpact" name=alarmImpact value="No outages"> No outages
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmImpact" name=alarmImpact value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmImpact" name=alarmImpact value="Network Outage"> Network Outage
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Alarm Type:
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="alarmType" name=alarmType value="Recon & Probing/Enviro Awareness"> Recon & Probing/Enviro Awareness
+              </label>
+
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmType" name=alarmType value="Delivery & Attack"> Delivery & Attack
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmType" name=alarmType value="System Compromise/Exploitation"> System Compromise/Exploitation
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Risk Level:
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="riskLevel" name=riskLevel value="Low (1)"> Low (1)
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="riskLevel" name=riskLevel value="Medium (11-25)"> Medium (11-25)
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="riskLevel" name=riskLevel value="High (26+)"> High (26+)
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Volume Of Events:
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="eventVolume" name=eventVolume value="Low (1-10)"> Low (1-10)
+              </label>
+
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="eventVolume" name=eventVolume value="Medium (11-25)"> Medium (11-25)
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="eventVolume" name=eventVolume value="High (26+)"> High (26+)
+              </label>  
+            </div>
+            </div>
+      </div>      
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Alarm Relevancy : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="alarmRelevancy" name=alarmRelevancy value="Not Relevant"> Not Relevant
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmRelevancy" name=alarmRelevancy value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="alarmRelevancy" name=alarmRelevancy value="Relevant"> Relevant
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Intent (malicious intent) : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="maliciousIntent" name=maliciousIntent value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="maliciousIntent" name=maliciousIntent value="No, possible misconfiguration"> No, possible misconfiguration
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="maliciousIntent" name=maliciousIntent value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Matching Vulnerabilities : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="matchingVuln" name=matchingVuln value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="matchingVuln" name=matchingVuln value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="matchingVuln" name=matchingVuln value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Availability Monitoring : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="availabilityMon" name=availabilityMon value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="availabilityMon" name=availabilityMon value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="availabilityMon" name=availabilityMon value="Down"> Down
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Account Name : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="accountName" name=accountName value="User"> User
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="accountName" name=accountName value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="accountName" name=accountName value="Administrator"> Administrator
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    How long has the threat been known :  
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:16em">
+                <input type="radio" required [formControl]="howLong" name=howLong value="Over 1 year"> Over 1 year
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:16em">
+                 <input type="radio" required [formControl]="howLong" name=howLong value="Less than 1 year"> Less than 1 year
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:16em">
+                 <input type="radio" required [formControl]="howLong" name=howLong value="Within 1 month or Zero Day"> Within 1 month or Zero Day
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Did the attacker gain access : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="gainAccess" name=gainAccess value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="gainAccess" name=gainAccess value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="gainAccess" name=gainAccess value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Was data extracted : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="dataExtracted" name=dataExtracted value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="dataExtracted" name=dataExtracted value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="dataExtracted" name=dataExtracted value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Has CIA Triad been violated : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="ciaTriad" name=ciaTriad value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="ciaTriad" name=ciaTriad value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="ciaTriad" name=ciaTriad value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+      <div>
+          <div class="form-group">
+                <label  class="alert alert-light" role="alert" for="green">
+                    Is sensitive info involved : 
+                </label>
+            <div class="btn-group btn-group-toggle" style="float: right;">
+             <label class="btn btn-outline-success radio-inline" style="width:18em">
+                <input type="radio" required [formControl]="sensitiveInfo" name=sensitiveInfo value="No"> No
+              </label>
+                        
+              <label class="btn btn-outline-warning radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="sensitiveInfo" name=sensitiveInfo value="Unknown"> Unknown
+              </label>
+             
+              <label class="btn btn-outline-danger radio-inline" style="width:18em">
+                 <input type="radio" required [formControl]="sensitiveInfo" name=sensitiveInfo value="Yes"> Yes
+              </label>  
+            </div>
+            </div>
+      </div>
+  <div class="form-group">
+    <label for="timeTaken">Estimated Time Taken to review alarm: </label>
+    <select type="select"
+            class="form-control"
+            id="timeTaken"
+            [formControl]="timeTaken"
+            name="timeTaken">
+             <option value="">--Select Time--</option>
+             <option value="4">Less Than 5 Minutes</option>
+             <option value="5">5 Minutes</option>
+             <option value="10">10 Minutes</option>
+             <option value="15">15 Minutes</option>
+             <option value="20">20 Minutes</option>
+             <option value="30">30 Minutes</option>
+             <option value="45">45 Minutes</option>
+             <option value="60">1 Hour</option>
+             <option value="90">1.5 Hour</option>
+             <option value="120">2 Hours</option>
+             <option value="125">2+ Hours</option>
+     </select>     
+  </div>
+
+  <button type="submit" class="btn btn-dark">Submit</button>
+  <button type="submit" class="btn btn-danger">Clear</button>
+
+  </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div [hidden]="!submitted">
+        <div class="container" xmls="http://www.w3.org/1999/html">
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4 class="page-header">Alarm Submission Successful</h4>
+                    </div>
+                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default" class="border border-secondary rounded">
+                    <div class="panel-heading">
+                        
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+      <li> 
+          <label  class="alert alert-light" role="alert">
+              <b>Ticket Number:</b>  {{ ticketNum.value }}
+          </label>
+          <br>
+          <label  class="alert alert-light" role="alert">
+                <b>Customer Name:</b>  {{ customerName.value }}
+          </label>
+       <div >
+          <label  class="alert alert-light" role="alert">
+                <b>Affected Asset:</b> {{ affectedAsset.value }}
+          </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Impact of Alarm:</b> {{ alarmImpact.value }}
+            </label>
+          </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b> Alarm Type: </b> {{ alarmType.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Risk Level: </b> {{ riskLevel.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Volume of Events: </b> {{ eventVolume.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Alarm Relevancy:</b>  {{ alarmRelevancy.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Intent (malicious intent):</b>  {{ maliciousIntent.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Matching Vulnerabilities:</b> {{ matchingVuln.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Availability Monitoring:</b>  {{ availabilityMon.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Account Name:</b>  {{ accountName.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>How long has the threat been known:</b>  {{ howLong.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b> Did the attacker gain access:</b>  {{ gainAccess.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Was data extracted:</b>  {{ dataExtracted.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Has the CIA Triad been violated:</b>  {{ ciaTriad.value }}
+            </label>
+        </div>
+        <div >
+            <label  class="alert alert-light" role="alert">
+                    <b>Is sensitive info involved:</b>  {{ sensitiveInfo.value }}
+            </label>
+        </div>
+        <div >
+                <label  class="alert alert-light" role="alert">
+                        <b>Time Taken to review alarm:</b>  {{ timeTaken.value }} Minutes
+                </label>
+            </div>
+        <div>
+          <label  class="alert alert-light" role="alert">
+                <b>Greens:</b> {{ greenInt }}
+          </label>
+        </div>
+        <div>
+          <label  class="alert alert-light" role="alert">
+                <b>Yellows:</b> {{ yellowInt }}
+          </label>
+        </div>
+        <div>
+          <label  class="alert alert-light" role="alert">
+                <b>Reds:</b> {{ redInt }}
+          </label>
+        </div>
+      </li>
+    <div class="p-4">
+        <button  class="btn btn-danger" (click)="submitted=false">New Alarm</button>
+        <button  class="btn btn-dark" (click)="submitted=false">Edit Alarm</button>
+    </div>
+    <br>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+<!--
+  <ul class="questionS">
+    <li *ngFor="let question of questionS">
+        <span class="badge">{{question.name}}</span>
+   </li>
+   </ul>
+
+
+   
+  
+
+<div>
+        <div class="form-group">
+          <li *ngFor="let choice of choiceS"> 
+              <label  class="alert alert-light" role="alert" for="green">
+                  {{choice.name}}
+              </label>
+          <div class="btn-group btn-group-toggle choiceS" data-toggle="buttons" style="float: right;">
+           <label class="btn btn-outline-success radio-inline" style="width:24em">
+              <input type="radio" required ngModel name={{choice.nameG}} value={{choice.green}}> {{choice.green}}
+            </label>
+                      
+            <label class="btn btn-outline-warning radio-inline" style="width:24em">
+               <input type="radio" required ngModel name={{choice.nameG}} value={{choice.yellow}}> {{choice.yellow}}
+            </label>
+           
+            <label class="btn btn-outline-danger radio-inline" style="width:24em">
+               <input type="radio" required ngModel name={{choice.nameG}} value={{choice.red}}> {{choice.red}}
+            </label>  
+          </div>
+          </li>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="form-group">
+          <li *ngFor="let choice of choiceS"> 
+              <label  class="alert alert-light" role="alert" for="green">
+                  {{choice.name}}
+              </label>
+            </li>
+          <div class="btn-group btn-group-toggle" data-toggle="radio-button" style="float: right;">
+           <label class="btn btn-outline-success radio-inline" style="width:24em">
+              <input type="radio" required ngModel name="affected" value="Workstation/Personal Device"> Workstation/Personal Device
+            </label>
+              <label class="btn btn-outline-warning radio-inline" style="width:24em">
+                <input type="radio" required ngModel name="affected" value="Non-Core Network Device"> Non-Core Network Device
+              </label>
+                 <label class="btn btn-outline-danger radio-inline" style="width:24em">
+                  <input type="radio" required ngModel name="affected" value="Core Asset"> Core Asset
+                 </label>
+          </div>
+    
+      </div>
+-->

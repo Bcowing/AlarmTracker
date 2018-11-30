@@ -1,0 +1,15 @@
+/* HeroesComponent's private CSS styles */
+ul{ list-style-type:none; }
+li{ list-style-type:none; }
+btn.btn-success.active,
+btn.btn-success:active {
+    color: green;
+    background: green;
+}
+.btn-warning:selected, .btn-warning.active{
+    background: #fce832;
+}
+
+.btn-danger:active, .btn-danger.active{
+    background: #c2302b;
+}
